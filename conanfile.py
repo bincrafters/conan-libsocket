@@ -23,9 +23,10 @@ class libsocket(ConanFile):
     options = dict({
         "shared":       [True, False],
         "fPIC":         [True, False],
+        "out_":         ['all', 'cpp', 'c']
     })
 
-    default_options = "shared=False", "fPIC=True"
+    default_options = "shared=False", "fPIC=True", "out_=all"
     build_policy = "missing"
 
     source_subfolder = "source_subfolder"
@@ -48,19 +49,28 @@ class libsocket(ConanFile):
         cmake = CMake(self)
         cmake.definitions["BUILD_SHARED_LIB"] = (True if self.options["shared"] else False)
         if self.options.fPIC:
-            cmake.definitions["CMAKE_CXX_FLAGS"] = "-fPIC"
+            cmake.definitions["CMAKE_CXX_FLAGS"] = "-fPIC -Iheaders/"
 
-        cmake.configure(build_folder=self.build_subfolder)
         return cmake
 
     def build(self):
         cmake = self.configure_cmake()
-        cmake.build()
+        self.run("cd source_subfolder && cmake CMakeLists.txt %s" % (cmake.command_line))
+        self.run("cd source_subfolder && cmake --build . %s" % cmake.build_config)
 
     def package(self):
         self.copy(pattern="LICENSE", dst="licenses", src=self.source_subfolder)
         cmake = self.configure_cmake()
-        cmake.install()
+        
+        self.copy("*.h", dst="include", src="headers")
+        self.copy("*.hpp", dst="include", src="headers")
+        self.copy("*.so", dst="lib", keep_path=False)
+        self.copy("*.a", dst="lib", keep_path=False)
 
     def package_info(self):
-        self.cpp_info.libs = tools.collect_libs(self)
+        if self.options.out_ == 'cpp':
+            self.cpp_info.libs = ["socket++"]
+        elif self.options.out_ == 'c':
+            self.cpp_info.libs = ["socket"]
+        else:
+            self.cpp_info.libs = ["socket++", "socket"]
