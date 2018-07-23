@@ -39,7 +39,7 @@ class libsocket(ConanFile):
         if self.settings.os == 'MacOS':
             raise Exception("This Libary does not support Mac OS!")
 
-        if self.settings.only_cpp && self.settings.only_c:
+        if self.settings.only_cpp and self.settings.only_c:
             raise Exception("Please choose if you would this Library with C++- or C-only Support.")
 
     def source(self):
