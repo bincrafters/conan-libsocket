@@ -2,7 +2,7 @@
 
 | Bintray   | Linux Build |
 | :--------:|:-----------------:|
-| [ ![Download](https://api.bintray.com/packages/l0nax/stable/libsocket/images/download.svg) ](https://bintray.com/l0nax/stable/libsocket/_latestVersion) | TODO: ADD BADGE |
+| [ ![Download](https://api.bintray.com/packages/l0nax/stable/libsocket/images/download.svg) ](https://bintray.com/l0nax/stable/libsocket/_latestVersion) | [![Build Status](https://travis-ci.org/l0nax/conan-libsocket.svg?branch=master)](https://travis-ci.org/l0nax/conan-libsocket) |
 
 ## Conan.io Information
 
