@@ -27,7 +27,7 @@ class libsocket(ConanFile):
         "fPIC":         [True, False],
     })
 
-    default_options = "shared=False", "static=False", "fPIC=True"
+    default_options = "shared=False", "fPIC=True"
     build_policy = "missing"
 
     source_subfolder = "source_subfolder"
