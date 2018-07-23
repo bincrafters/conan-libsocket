@@ -22,8 +22,6 @@ class libsocket(ConanFile):
     settings = "os", "arch", "compiler", "build_type"
     options = dict({
         "shared":       [True, False],
-        "only_cpp":     [True, False],
-        "only_c":       [True, False],
         "fPIC":         [True, False],
     })
 
@@ -36,11 +34,8 @@ class libsocket(ConanFile):
     def config_options(self):
         if self.settings.os == 'Windows':
             raise Exception("This Libary does not support Windows!")
-        if self.settings.os == 'MacOS':
+        if self.settings.os == 'Macos':
             raise Exception("This Libary does not support Mac OS!")
-
-        if self.settings.only_cpp and self.settings.only_c:
-            raise Exception("Please choose if you would this Library with C++- or C-only Support.")
 
     def source(self):
         source_url = "https://github.com/dermesser/libsocket"
@@ -51,8 +46,8 @@ class libsocket(ConanFile):
 
     def configure_cmake(self):
         cmake = CMake(self)
-        cmake.definitions["BUILD_STATIC_LIB"] = (True if self.settings.static else False)
-        if self.settings.fPIC:
+        cmake.definitions["BUILD_SHARED_LIB"] = (True if self.options["shared"] else False)
+        if self.options.fPIC:
             cmake.definitions["CMAKE_CXX_FLAGS"] = "-fPIC"
 
         cmake.configure(build_folder=self.build_subfolder)
