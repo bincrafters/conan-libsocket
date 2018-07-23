@@ -18,7 +18,7 @@ class TestPackageConan(ConanFile):
     def test(self):
         with tools.environment_append(RunEnvironment(self).vars):
             bin_path = os.path.join("bin", "test_package")
-            if self.settings.os == "Windows" || self.settings.os == "Macos":
+            if self.settings.os == "Windows" or self.settings.os == "Macos":
                 raise Exception("This Library does not support Windows/ Mac OS!")
             else:
                 self.run("LD_LIBRARY_PATH=%s %s" % (os.environ.get('LD_LIBRARY_PATH', ''), bin_path))
