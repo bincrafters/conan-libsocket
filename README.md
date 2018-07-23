@@ -12,6 +12,41 @@ Bincrafters packages can be found in the following public Conan repository:
 
 *Note: You can click the "Set Me Up" button on the Bintray page above for instructions on using packages from this repository.*
 
+## Setup
+
+To configure your Conan Client to work with Arsen packages, you will need to add
+the Bincrafter Repository to the list of Remotes.
+```bash
+$ conan remote add bincrafter https://api.bintray.com/conan/bincrafters/public-conan
+```
+
+## Project Setup
+
+Here is a Example _conanfile.txt_:
+```
+[requires]
+libsocket/2.4.1@bincrafters/stable
+
+[generators]
+cmake
+```
+
+Complete the installation of requirements for your project running:
+```
+$ conan install . --build=missing
+```
+
+## Options
+
+Here is a List off all possible Options that you can use:
+
+| Option    | Description                             | Default | Possible Values |
+| --------- | --------------------------------------- | ------- | --------------- |
+| shared    | Build the shared library                | False   | True, False     |
+| static    | Build the static library                | True    | True, False     |
+| only_cpp  | Build the library only with C++ Support | False   | True, False     |
+| only_c    | Build the library only with C Support   | False   | True, False     |
+
 ## Issues
 
 If you wish to report an issue or make a request for a Bincrafters package, please do so here:
