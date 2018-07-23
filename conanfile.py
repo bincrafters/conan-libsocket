@@ -62,8 +62,10 @@ class libsocket(ConanFile):
         self.copy(pattern="LICENSE", dst="licenses", src=self.source_subfolder)
         cmake = self.configure_cmake()
         
-        self.copy("*.h", dst="include", src=self.source_subfolder+"headers")
-        self.copy("*.hpp", dst="include", src=self.source_subfolder+"headers")
+#        self.copy("*.h", dst="include", src=self.source_subfolder+"headers")
+#        self.copy("*.hpp", dst="include", src=self.source_subfolder+"headers")
+        self.copy("*.h", dst="include")
+        self.copy("*.hpp", dst="include")
         self.copy("*.so", dst="lib", keep_path=False)
         self.copy("*.a", dst="lib", keep_path=False)
 
