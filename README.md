@@ -43,8 +43,6 @@ Here is a List off all possible Options that you can use:
 | Option    | Description                               | Default | Possible Values |
 | --------- | ---------------------------------------   | ------- | --------------- |
 | shared    | Build the shared library                  | False   | True, False     |
-| only_cpp  | Build the library only with C++ Support   | False   | True, False     |
-| only_c    | Build the library only with C Support     | False   | True, False     |
 | fPIC      | Compile the Library with the '-fPIC' Flag | True    | True, False     |
 
 ## Issues
