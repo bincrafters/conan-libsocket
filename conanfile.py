@@ -21,12 +21,12 @@ class libsocket(ConanFile):
 
     settings = "os", "arch", "compiler", "build_type"
     options = dict({
-        "shared":       [True, False],
+        "static":       [True, False],
         "fPIC":         [True, False],
         "out_":         ['all', 'cpp', 'c']
     })
 
-    default_options = "shared=False", "fPIC=True", "out_=all"
+    default_options = "static=True", "fPIC=True", "out_=all"
     build_policy = "missing"
 
     source_subfolder = "source_subfolder"
@@ -47,7 +47,7 @@ class libsocket(ConanFile):
 
     def configure_cmake(self):
         cmake = CMake(self)
-        cmake.definitions["BUILD_SHARED_LIB"] = (True if self.options["shared"] else False)
+        cmake.definitions["BUILD_STATIC_LIBS"] = ('ON' if self.options["static"] else 'OFF')
         if self.options.fPIC:
             cmake.definitions["CMAKE_CXX_FLAGS"] = "-fPIC -Iheaders/"
 
@@ -69,8 +69,17 @@ class libsocket(ConanFile):
 
     def package_info(self):
         if self.options.out_ == 'cpp':
-            self.cpp_info.libs = ["socket++"]
+            if self.options.static:
+                self.options.libs = ["libsocket_int"]
+            else:
+                self.options.libs = ["libsocket"]
         elif self.options.out_ == 'c':
-            self.cpp_info.libs = ["socket"]
+            if self.options.static:
+               self.cpp_info.libs = ["libsocket_int"]
+            else:
+             self.cpp_info.libs = ["libsocket"]
         else:
-            self.cpp_info.libs = ["socket++", "socket"]
+            if self.options.static:
+                self.cpp_info.libs = ["libsocket++_int", "libsocket_int"]
+            else:
+                self.cpp_info.libs = ["socket++", "socket"]
