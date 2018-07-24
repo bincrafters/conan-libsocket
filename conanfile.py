@@ -74,10 +74,5 @@ class libsocket(ConanFile):
             self.copy("*.a", dst="lib", keep_path=False)
 
     def package_info(self):
-        if self.options.out_ == 'cpp':
-            self.options.libs = ["libsocket++"]
-        elif self.options.out_ == 'c':
-            self.cpp_info.libs = ["libsocket"]
-        else:
-            self.cpp_info.libs = ["libsocket++", "libsocket"]
+        self.cpp_info.libs = ["socket++", "socket"]
 
