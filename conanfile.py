@@ -39,11 +39,13 @@ class libsocket(ConanFile):
             raise Exception("This Libary does not support Mac OS!")
 
     def source(self):
-        source_url = "https://github.com/dermesser/libsocket"
-        tools.get("{0}/archive/v{1}.tar.gz".format(source_url, self.version))
-        extracted_dir = self.name + "-" + self.version
+#        source_url = "https://github.com/dermesser/libsocket"
+#        tools.get("{0}/archive/v{1}.tar.gz".format(source_url, self.version))
+#        extracted_dir = self.name + "-" + self.version
 
-        os.rename(extracted_dir, self.source_subfolder)
+        self.run("git clone https://github.com/dermesser/libsocket %s" % self.source_subfolder)
+
+#        os.rename(extracted_dir, self.source_subfolder)
 
     def configure_cmake(self):
         cmake = CMake(self)
@@ -55,13 +57,15 @@ class libsocket(ConanFile):
 
     def build(self):
         cmake = self.configure_cmake()
+
+        make_args = ('socket_int socket++_int' if self.options.static else '')
+
         self.run("cd %s && cmake CMakeLists.txt %s" % (self.source_subfolder, cmake.command_line))
-        self.run("cd %s && cmake --build . %s" % (self.source_subfolder, cmake.build_config))
+        self.run("cd %s && make %s" % (self.source_subfolder, make_args))
+
 
     def package(self):
         self.copy(pattern="LICENSE", dst="licenses", src=self.source_subfolder)
-        cmake = self.configure_cmake()
-
         self.copy("*.h", dst="include/libsocket", src=self.source_subfolder+"/headers")
         self.copy("*.hpp", dst="include/libsocket", src=self.source_subfolder+"/headers")
         if not self.options.static:
@@ -76,3 +80,4 @@ class libsocket(ConanFile):
             self.cpp_info.libs = ["libsocket"]
         else:
             self.cpp_info.libs = ["libsocket++", "libsocket"]
+
