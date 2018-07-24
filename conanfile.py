@@ -69,17 +69,8 @@ class libsocket(ConanFile):
 
     def package_info(self):
         if self.options.out_ == 'cpp':
-            if self.options.static:
-                self.options.libs = ["libsocket_int"]
-            else:
-                self.options.libs = ["libsocket"]
+            self.options.libs = ["libsocket"]
         elif self.options.out_ == 'c':
-            if self.options.static:
-               self.cpp_info.libs = ["libsocket_int"]
-            else:
-             self.cpp_info.libs = ["libsocket"]
+            self.cpp_info.libs = ["libsocket"]
         else:
-            if self.options.static:
-                self.cpp_info.libs = ["libsocket++_int", "libsocket_int"]
-            else:
-                self.cpp_info.libs = ["socket++", "socket"]
+            self.cpp_info.libs = ["libsocket++", "libsocket"]
