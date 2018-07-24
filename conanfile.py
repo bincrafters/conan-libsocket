@@ -47,7 +47,7 @@ class libsocket(ConanFile):
 
     def configure_cmake(self):
         cmake = CMake(self)
-        cmake.definitions["BUILD_STATIC_LIBS"] = ('ON' if self.options["static"] else 'OFF')
+        cmake.definitions["BUILD_STATIC_LIBS"] = ('ON' if self.options.static else 'OFF')
         if self.options.fPIC:
             cmake.definitions["CMAKE_CXX_FLAGS"] = "-fPIC -Iheaders/"
 
