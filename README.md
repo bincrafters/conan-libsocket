@@ -2,7 +2,7 @@
 
 | Bintray   | Linux Build |
 | :--------:|:-----------------:|
-| [ ![Download](https://api.bintray.com/packages/l0nax/stable/libsocket/images/download.svg) ](https://bintray.com/l0nax/stable/libsocket/_latestVersion) | [![Build Status](https://travis-ci.org/l0nax/conan-libsocket.svg?branch=master)](https://travis-ci.org/l0nax/conan-libsocket) |
+| [ ![Download](https://api.bintray.com/packages/l0nax/stable/libsocket/images/download.svg) ](https://bintray.com/l0nax/stable/libsocket/_latestVersion) | [ ![Download](https://api.bintray.com/packages/l0nax/stable/libsocket%3Al0nax/images/download.svg) ](https://bintray.com/l0nax/stable/libsocket%3Al0nax/_latestVersion) |
 
 ## Conan.io Information
 
