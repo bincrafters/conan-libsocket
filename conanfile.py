@@ -57,7 +57,6 @@ class libsocket(ConanFile):
         cmake = self.configure_cmake()
         self.run("cd %s && cmake CMakeLists.txt %s" % (self.source_subfolder, cmake.command_line))
         self.run("cd %s && cmake --build . %s" % (self.source_subfolder, cmake.build_config))
-        self.output.warn(cmake.build_config)
 
     def package(self):
         self.copy(pattern="LICENSE", dst="licenses", src=self.source_subfolder)
@@ -72,7 +71,7 @@ class libsocket(ConanFile):
 
     def package_info(self):
         if self.options.out_ == 'cpp':
-            self.options.libs = ["libsocket"]
+            self.options.libs = ["libsocket++"]
         elif self.options.out_ == 'c':
             self.cpp_info.libs = ["libsocket"]
         else:
