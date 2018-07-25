@@ -11,7 +11,3 @@ if [[ "$(uname -s)" == 'Darwin' ]]; then
 fi
 
 python build.py
-
-## Test the Package
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-conan test ${DIR}/../_package-test ${CONAN_REFERENCE}@${CONAN_USERNAME}/${CONAN_CHANNEL}
