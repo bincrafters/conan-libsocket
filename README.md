@@ -17,7 +17,7 @@ Bincrafters packages can be found in the following public Conan repository:
 To configure your Conan Client to work with Arsen packages, you will need to add
 the Bincrafter Repository to the list of Remotes.
 ```bash
-$ conan remote add l0nax-stable https://api.bintray.com/conan/l0nax/stable
+$ conan remote add bincrafter-public https://api.bintray.com/conan/bincrafters/public-conan
 ```
 
 ## Project Setup
@@ -25,7 +25,7 @@ $ conan remote add l0nax-stable https://api.bintray.com/conan/l0nax/stable
 Here is a Example _conanfile.txt_:
 ```
 [requires]
-libsocket/2.4.1@l0nax/stable
+libsocket/2.4.1@bincrafters/stable
 
 [generators]
 cmake
