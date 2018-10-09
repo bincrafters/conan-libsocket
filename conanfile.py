@@ -33,7 +33,7 @@ class libsocket(ConanFile):
     build_subfolder = "build_subfolder"
 
     def source(self):
-        self.run("git clone https://github.com/dermesser/libsocket %s" % self.source_subfolder)
+        self.run("git clone https://github.com/dermesser/libsocket --depth 1 %s" % self.source_subfolder)
 
     def configure_cmake(self):
         cmake = CMake(self)
