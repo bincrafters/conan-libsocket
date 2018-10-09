@@ -38,26 +38,29 @@ class libsocket(ConanFile):
     def configure_cmake(self):
         cmake = CMake(self)
         cmake.definitions["BUILD_STATIC_LIBS"] = not self.options.shared
+        cmake.definitions["BUILD_SHARED_LIBS"] = self.options.shared
         if self.options.fPIC:
             cmake.definitions["CMAKE_CXX_FLAGS"] = "-fPIC -Iheaders/"
+        cmake.configure(build_folder=self.build_subfolder)
 
         return cmake
 
     def build(self):
+        if not self.options.shared:
+            tools.replace_in_file(os.path.join(self.source_subfolder, 'CMakeLists.txt'),
+                                  'ADD_DEPENDENCIES(socket++ socket)',
+                                  'ADD_DEPENDENCIES(socket++_int socket)')
+            tools.replace_in_file(os.path.join(self.source_subfolder, 'CMakeLists.txt'),
+                                  'export(TARGETS socket++ socket_int',
+                                  'export(TARGETS socket++_int socket_int')
+
         cmake = self.configure_cmake()
-
-        make_args = ('socket_int socket++_int' if not self.options.shared else '')
-
-        self.run("cd %s && cmake CMakeLists.txt %s" % (self.source_subfolder, cmake.command_line))
-        self.run("cd %s && make %s" % (self.source_subfolder, make_args))
-
+        cmake.build()
 
     def package(self):
+        cmake = self.configure_cmake()
+        cmake.install()
         self.copy(pattern="LICENSE", dst="licenses", src=self.source_subfolder)
-        self.copy("*.h", dst="include/libsocket", src=self.source_subfolder + "/headers")
-        self.copy("*.hpp", dst="include/libsocket", src=self.source_subfolder + "/headers")
-        self.copy("*.so", dst="lib", keep_path=False)
-        self.copy("*.a", dst="lib", keep_path=False)
 
     def package_info(self):
         self.cpp_info.libs = ["socket++", "socket"]
