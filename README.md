@@ -41,7 +41,7 @@ $ conan install . --build=missing
 Here is a List off all possible Options that you can use:
 
 | Option    | Description                               | Default | Possible Values |
-| --------- | ---------------------------------------   | ------- | --------------- |
+| --------- | ----------------------------------------- | ------- | --------------- |
 | shared    | Build the shared library                  | False   | True, False     |
 | fPIC      | Compile the Library with the '-fPIC' Flag | True    | True, False     |
 
