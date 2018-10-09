@@ -19,7 +19,7 @@ class libsocket(ConanFile):
     exports_sources = ["CMakeLists.txt"]
     generators = "cmake"
 
-    settings = "os", "arch", "compiler", "build_type"
+    settings = {"os": ["Linux"], "arch": None, "compiler": None, "build_type": None}
     options = dict({
         "shared":       [True, False],
         "fPIC":         [True, False],
@@ -31,12 +31,6 @@ class libsocket(ConanFile):
 
     source_subfolder = "source_subfolder"
     build_subfolder = "build_subfolder"
-
-    def config_options(self):
-        if self.settings.os == 'Windows':
-            raise Exception("This Libary does not support Windows!")
-        if self.settings.os == 'Macos':
-            raise Exception("This Libary does not support Mac OS!")
 
     def source(self):
         self.run("git clone https://github.com/dermesser/libsocket %s" % self.source_subfolder)
