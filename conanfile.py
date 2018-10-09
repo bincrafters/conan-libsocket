@@ -21,12 +21,12 @@ class libsocket(ConanFile):
 
     settings = "os", "arch", "compiler", "build_type"
     options = dict({
-        "static":       [True, False],
+        "shared":       [True, False],
         "fPIC":         [True, False],
         "out_":         ['all', 'cpp', 'c']
     })
 
-    default_options = "static=True", "fPIC=True", "out_=all"
+    default_options = "shared=False", "fPIC=True", "out_=all"
     build_policy = "missing"
 
     source_subfolder = "source_subfolder"
@@ -43,7 +43,7 @@ class libsocket(ConanFile):
 
     def configure_cmake(self):
         cmake = CMake(self)
-        cmake.definitions["BUILD_STATIC_LIBS"] = ('ON' if self.options.static else 'OFF')
+        cmake.definitions["BUILD_STATIC_LIBS"] = not self.options.shared
         if self.options.fPIC:
             cmake.definitions["CMAKE_CXX_FLAGS"] = "-fPIC -Iheaders/"
 
@@ -52,7 +52,7 @@ class libsocket(ConanFile):
     def build(self):
         cmake = self.configure_cmake()
 
-        make_args = ('socket_int socket++_int' if self.options.static else '')
+        make_args = ('socket_int socket++_int' if not self.options.shared else '')
 
         self.run("cd %s && cmake CMakeLists.txt %s" % (self.source_subfolder, cmake.command_line))
         self.run("cd %s && make %s" % (self.source_subfolder, make_args))
@@ -60,12 +60,10 @@ class libsocket(ConanFile):
 
     def package(self):
         self.copy(pattern="LICENSE", dst="licenses", src=self.source_subfolder)
-        self.copy("*.h", dst="include/libsocket", src=self.source_subfolder+"/headers")
-        self.copy("*.hpp", dst="include/libsocket", src=self.source_subfolder+"/headers")
-        if not self.options.static:
-            self.copy("*.so", dst="lib", keep_path=False)
-        else:
-            self.copy("*.a", dst="lib", keep_path=False)
+        self.copy("*.h", dst="include/libsocket", src=self.source_subfolder + "/headers")
+        self.copy("*.hpp", dst="include/libsocket", src=self.source_subfolder + "/headers")
+        self.copy("*.so", dst="lib", keep_path=False)
+        self.copy("*.a", dst="lib", keep_path=False)
 
     def package_info(self):
         self.cpp_info.libs = ["socket++", "socket"]
