@@ -39,13 +39,7 @@ class libsocket(ConanFile):
             raise Exception("This Libary does not support Mac OS!")
 
     def source(self):
-#        source_url = "https://github.com/dermesser/libsocket"
-#        tools.get("{0}/archive/v{1}.tar.gz".format(source_url, self.version))
-#        extracted_dir = self.name + "-" + self.version
-
         self.run("git clone https://github.com/dermesser/libsocket %s" % self.source_subfolder)
-
-#        os.rename(extracted_dir, self.source_subfolder)
 
     def configure_cmake(self):
         cmake = CMake(self)
