@@ -39,8 +39,6 @@ class libsocket(ConanFile):
         cmake = CMake(self)
         cmake.definitions["BUILD_STATIC_LIBS"] = not self.options.shared
         cmake.definitions["BUILD_SHARED_LIBS"] = self.options.shared
-        if self.options.fPIC:
-            cmake.definitions["CMAKE_CXX_FLAGS"] = "-fPIC -Iheaders/"
         cmake.configure(build_folder=self.build_subfolder)
 
         return cmake
@@ -53,6 +51,9 @@ class libsocket(ConanFile):
             tools.replace_in_file(os.path.join(self.source_subfolder, 'CMakeLists.txt'),
                                   'export(TARGETS socket++ socket_int',
                                   'export(TARGETS socket++_int socket_int')
+        tools.replace_in_file(os.path.join(self.source_subfolder, 'C++', 'CMakeLists.txt'),
+                              'SET(CMAKE_CXX_FLAGS "-std=c++11") # -DVERBOSE")',
+                              'SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11") # -DVERBOSE")')
 
         cmake = self.configure_cmake()
         cmake.build()
