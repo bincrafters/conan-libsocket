@@ -9,7 +9,7 @@ class libsocket(ConanFile):
     name = "libsocket"
     version = "2.4.1"
     description = "Conan.io Package for libsocket Libary."
-    url = "https://github.com/l0nax/conan-libsocket"
+    url = "https://github.com/bintray/conan-libsocket"
     homepage = "https://github.com/dermesser/libsocket"
     author = "Emanuel Bennici <benniciemanuel78@gmail.com>"
     license = "https://github.com/dermesser/libsocket/blob/master/LICENSE"
@@ -19,7 +19,8 @@ class libsocket(ConanFile):
     exports_sources = ["CMakeLists.txt"]
     generators = "cmake"
 
-    settings = {"os": ["Linux"], "arch": None, "compiler": None, "build_type": None}
+    #settings = {"os": ["Linux"], "arch": None, "compiler": None, "build_type": None}
+    settings = "os", "arch", "compiler", "build_type"
     options = dict({
         "shared":       [True, False],
         "fPIC":         [True, False],
@@ -32,8 +33,10 @@ class libsocket(ConanFile):
     source_subfolder = "source_subfolder"
     build_subfolder = "build_subfolder"
 
+
     def source(self):
         self.run("git clone https://github.com/dermesser/libsocket --depth 1 %s" % self.source_subfolder)
+
 
     def configure_cmake(self):
         cmake = CMake(self)
@@ -42,6 +45,7 @@ class libsocket(ConanFile):
         cmake.configure(build_folder=self.build_subfolder)
 
         return cmake
+
 
     def build(self):
         if not self.options.shared:
@@ -58,11 +62,19 @@ class libsocket(ConanFile):
         cmake = self.configure_cmake()
         cmake.build()
 
+
     def package(self):
         cmake = self.configure_cmake()
         cmake.install()
+
+        # copy LICENSE File
         self.copy(pattern="LICENSE", dst="licenses", src=self.source_subfolder)
+
 
     def package_info(self):
         self.cpp_info.libs = ["socket++", "socket"]
 
+
+    def config_options(self):
+        if platform.system() != "Linux":
+            raise Exception("Unsupported System! This package currently only support Linux")
