@@ -73,8 +73,3 @@ class libsocket(ConanFile):
 
     def package_info(self):
         self.cpp_info.libs = ["socket++", "socket"]
-
-
-    def config_options(self):
-        if platform.system() != "Linux":
-            raise Exception("Unsupported System! This package currently only support Linux")
