@@ -38,7 +38,7 @@ class libsocket(ConanFile):
         self.run("git clone https://github.com/dermesser/libsocket --depth 1 %s" % self.source_subfolder)
 
         # patching CMakeLists.txt in Source Directory
-        tools.patch(base_path=self.source_subfolder, patch_file="CMakeLists.txt.patch)
+        tools.patch(base_path=self.source_subfolder, patch_file="CMakeLists.txt.patch")
 
 
     def configure_cmake(self):
