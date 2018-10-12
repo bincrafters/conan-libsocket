@@ -20,7 +20,8 @@ class libsocket(ConanFile):
     generators = "cmake"
 
     #settings = {"os": ["Linux"], "arch": None, "compiler": None, "build_type": None}
-    sns = dict({
+    settings = "os", "arch", "compiler", "build_type"
+    options = dict({
         "shared":       [True, False],
         "fPIC":         [True, False],
         "out_":         ['all', 'cpp', 'c']
