@@ -20,8 +20,7 @@ class libsocket(ConanFile):
     generators = "cmake"
 
     #settings = {"os": ["Linux"], "arch": None, "compiler": None, "build_type": None}
-    settings = "os", "arch", "compiler", "build_type"
-    options = dict({
+    sns = dict({
         "shared":       [True, False],
         "fPIC":         [True, False],
         "out_":         ['all', 'cpp', 'c']
@@ -38,7 +37,7 @@ class libsocket(ConanFile):
         self.run("git clone https://github.com/dermesser/libsocket --depth 1 %s" % self.source_subfolder)
 
         # patching CMakeLists.txt in Source Directory
-        tools.patch(base_path=self.source_subfolder, patch_file="CMakeLists.txt.patch")
+
 
 
     def configure_cmake(self):
