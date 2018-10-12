@@ -37,8 +37,16 @@ class libsocket(ConanFile):
     def source(self):
         self.run("git clone https://github.com/dermesser/libsocket --depth 1 %s" % self.source_subfolder)
 
+        # patching CMakeLists.txt in Source Directory
+        tools.patch(base_path=self.source_subfolder, patch_file="CMakeLists.txt.patch)
+
 
     def configure_cmake(self):
+        # check if Cross-Building
+        if tools.cross_building(self.settings):
+            open('./test_package/CROSS_COMPILING', 'a').close()
+
+        # configure
         cmake = CMake(self)
         cmake.definitions["BUILD_STATIC_LIBS"] = not self.options.shared
         cmake.definitions["BUILD_SHARED_LIBS"] = self.options.shared

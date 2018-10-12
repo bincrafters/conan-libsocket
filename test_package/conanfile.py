@@ -16,4 +16,6 @@ class TestPackageConan(ConanFile):
         cmake.build()
 
     def test(self):
-        self.run("LD_LIBRARY_PATH=%s %s"%(os.environ.get('LD_LIBRARY_PATH', ''),os.path.join("bin","test_package")))
+        # check if we haved Cross-Compiled
+        if not os.path.isfile('./CROSS_COMPILING'):
+            self.run("LD_LIBRARY_PATH=%s %s"%(os.environ.get('LD_LIBRARY_PATH', ''),os.path.join("bin","test_package")))
