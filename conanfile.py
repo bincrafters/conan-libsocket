@@ -42,11 +42,6 @@ class libsocket(ConanFile):
 
 
     def configure_cmake(self):
-        # check if Cross-Building
-        if tools.cross_building(self.settings):
-            open('./test_package/CROSS_COMPILING', 'a').close()
-
-        # configure
         cmake = CMake(self)
         cmake.definitions["BUILD_STATIC_LIBS"] = not self.options.shared
         cmake.definitions["BUILD_SHARED_LIBS"] = self.options.shared
