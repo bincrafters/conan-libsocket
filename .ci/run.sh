@@ -10,4 +10,8 @@ if [[ "$(uname -s)" == 'Darwin' ]]; then
     pyenv activate conan
 fi
 
+## create Environment Variables
+export CONAN_UPLOAD="https://api.bintray.com/conan/bincrafters/public-conan"
+
+## build Package
 python build.py
