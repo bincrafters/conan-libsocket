@@ -9,7 +9,7 @@ class libsocket(ConanFile):
     name = "libsocket"
     version = "2.4.1"
     description = "Conan.io Package for libsocket Libary."
-    url = "https://github.com/bintray/conan-libsocket"
+    url = "https://github.com/bincrafters/conan-libsocket"
     homepage = "https://github.com/dermesser/libsocket"
     author = "Emanuel Bennici <benniciemanuel78@gmail.com>"
     license = "https://github.com/dermesser/libsocket/blob/master/LICENSE"
