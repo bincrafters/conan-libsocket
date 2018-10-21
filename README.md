@@ -25,7 +25,7 @@ $ conan remote add bincrafter-public https://api.bintray.com/conan/bincrafters/p
 Here is a Example _conanfile.txt_:
 ```
 [requires]
-libsocket/2.4.1@bincrafters/stable
+libsocket/2.4.1@bincrafters/testing
 
 [generators]
 cmake
