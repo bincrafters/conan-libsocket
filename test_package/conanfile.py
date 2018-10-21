@@ -25,7 +25,7 @@ class TestPackageConan(ConanFile):
         ## it's not releay a nice way..
         if arch == "64bit":
             if "64-bit" in output and "x86-64" in output: 
-                self.run("LD_LIBRARY_PATH=%s %s"%(os.environ.get('LD_LIBRARY_PATH', ''), os.path.join("bin","test_package")), run_environment=True)
+                self.run(os.path.join("bin","test_package"), run_environment=True)
         elif arch == "32bit":
             if "32-bit" in output and "x86" in output:
-                self.run("LD_LIBRARY_PATH=%s %s"%(os.environ.get('LD_LIBRARY_PATH', ''), os.path.join("bin","test_package")), run_environment=True)
+                self.run(os.path.join("bin","test_package"), run_environment=True)
