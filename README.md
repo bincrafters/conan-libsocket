@@ -38,7 +38,7 @@ $ conan install . --build=missing
 
 ## Options
 
-Here is a List off all possible Options that you can use:
+Here is a List of all possible Options that you can use:
 
 | Option    | Description                               | Default | Possible Values |
 | --------- | ----------------------------------------- | ------- | --------------- |
