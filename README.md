@@ -2,7 +2,7 @@
 
 | Bintray   | Linux Build |
 | :--------:|:-----------------:|
-| [ ![Download](https://api.bintray.com/packages/bincrafters/public-conan/libsocket%3Abincrafters/images/download.svg) ](https://bintray.com/bincrafters/public-conan/libsocket%3Abincrafters/_latestVersion) | [![Build Status](https://travis-ci.org/bincrafters/conan-libsocket.svg?branch=testing%2F2.4.1)](https://travis-ci.org/bincrafters/conan-libsocket) |
+| [ ![Download](https://api.bintray.com/packages/bincrafters/public-conan/libsocket%3Abincrafters/images/download.svg) ](https://bintray.com/bincrafters/public-conan/libsocket%3Abincrafters/_latestVersion) | [![Build Status](https://travis-ci.com/bincrafters/conan-libsocket.svg?branch=testing%2F2.4.1)](https://travis-ci.com/bincrafters/conan-libsocket) |
 
 ## Conan.io Information
 
