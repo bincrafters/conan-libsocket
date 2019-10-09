@@ -7,7 +7,7 @@ import os
 
 class libsocket(ConanFile):
     name = "libsocket"
-    version = "2.4.1"
+    version = "2.5.0"
     description = "Conan.io Package for libsocket Libary."
     url = "https://github.com/bincrafters/conan-libsocket"
     homepage = "https://github.com/dermesser/libsocket"
