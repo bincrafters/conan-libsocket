@@ -9,7 +9,7 @@ if __name__ == "__main__":
 					login_username=os.environ.get('CONAN_LOGIN_USERNAME'),
 					upload=os.environ.get('CONAN_UPLOAD'),
 					password=os.environ.get('CONAN_PASSWORD'),
-					channel='testing'
+					channel='stable'
 					)
 
 	builder.add_common_builds()
