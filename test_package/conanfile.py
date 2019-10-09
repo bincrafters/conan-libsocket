@@ -16,16 +16,18 @@ class TestPackageConan(ConanFile):
 
     def test(self):
         ## check if Binary can be executed
-        p = subprocess.Popen(["file", os.path.join("bin", "test_package")], stdout=subprocess.PIPE, shell=True)
-        output = p.communicate()[0]
-        
-        arch = platform.architecture()
-        
+        p = subprocess.Popen("file " + os.path.join("bin", "test_package"), stdout=subprocess.PIPE, shell=True)
+        output = str(p.communicate()[0])
+
+        arch = platform.architecture()[0]
+
         ## only Execute if it's possible
         ## it's not releay a nice way..
         if arch == "64bit":
-            if "64-bit" in output and "x86-64" in output: 
+            if "64-bit" in output and "x86-64" in output:
                 self.run(os.path.join("bin","test_package"), run_environment=True)
         elif arch == "32bit":
             if "32-bit" in output and "x86" in output:
                 self.run(os.path.join("bin","test_package"), run_environment=True)
+        else:
+            self.output.warn("Could not run Test because Architecture does not match!")
