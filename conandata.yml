@@ -1,0 +1,4 @@
+sources:
+  "2.5.0":
+    url: "https://github.com/dermesser/libsocket/archive/v2.5.0.tar.gz"
+    sha256: "0afe2ece985caa0b44546d10426b15a506164d5b96d7242890c7d0337f479689"
