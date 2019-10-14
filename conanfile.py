@@ -1,40 +1,35 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 from conans import ConanFile, CMake, tools
 import os
 
 
 class libsocket(ConanFile):
     name = "libsocket"
-    version = "2.5.0"
-    description = "Conan.io Package for libsocket Libary."
+    description = "Socket library with support for TCP, UDP and Unix sockets"
+    topics = ("conan", "libsocket", "socket", "sockets")
     url = "https://github.com/bincrafters/conan-libsocket"
     homepage = "https://github.com/dermesser/libsocket"
-    author = "Emanuel Bennici <benniciemanuel78@gmail.com>"
     license = "https://github.com/dermesser/libsocket/blob/master/LICENSE"
-
-    exports = ["LICENSE"]
+    author = "Emanuel Bennici <benniciemanuel78@gmail.com>"
 
     exports_sources = ["CMakeLists.txt"]
     generators = "cmake"
 
     settings = "os", "arch", "compiler", "build_type"
-    options = dict({
+    options = {
         "shared":       [True, False],
         "fPIC":         [True, False],
         "out_":         ['all', 'cpp', 'c']
-    })
+    }
 
     default_options = {'shared': False, 'fPIC': True, 'out_': 'all'}
-    build_policy = "missing"
 
     _source_subfolder = "source_subfolder"
     _build_subfolder = "build_subfolder"
 
-
     def source(self):
-        self.run("git clone https://github.com/dermesser/libsocket --depth 1 %s" % self._source_subfolder)
+        tools.get(**self.conan_data["sources"][self.version])
+        extracted_dir = self.name + "-" + self.version
+        os.rename(extracted_dir, self._source_subfolder)
 
 
     def _configure_cmake(self):

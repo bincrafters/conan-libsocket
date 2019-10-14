@@ -2,7 +2,7 @@
 
 | Bintray   | Linux Build |
 | :--------:|:-----------------:|
-| [ ![Download](https://api.bintray.com/packages/bincrafters/public-conan/libsocket%3Abincrafters/images/download.svg) ](https://bintray.com/bincrafters/public-conan/libsocket%3Abincrafters/_latestVersion) | [![Build Status](https://travis-ci.com/bincrafters/conan-libsocket.svg?branch=testing%2F2.5.0)](https://travis-ci.com/bincrafters/conan-libsocket) |
+| [ ![Download](https://api.bintray.com/packages/bincrafters/public-conan/libsocket%3Abincrafters/images/download.svg) ](https://bintray.com/bincrafters/public-conan/libsocket%3Abincrafters/_latestVersion) | [![Build Status](https://travis-ci.com/bincrafters/conan-libsocket.svg?branch=stable%2F2.5.0)](https://travis-ci.com/bincrafters/conan-libsocket) |
 
 ## Conan.io Information
 
@@ -25,7 +25,7 @@ $ conan remote add bincrafter-public https://api.bintray.com/conan/bincrafters/p
 Here is a Example _conanfile.txt_:
 ```
 [requires]
-libsocket/2.5.0@bincrafters/testing
+libsocket/2.5.0@bincrafters/stable
 
 [generators]
 cmake
@@ -76,4 +76,3 @@ The contents of this GIT repository are completely separate from the software be
 ### License for Bincrafters recipe:
 
     ~/.conan/data/<pkg_name>/<pkg_version>/bincrafters/export/LICENSE.md
-

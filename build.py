@@ -1,16 +1,9 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
-from cpt.packager import ConanMultiPackager
-import os
+from bincrafters import build_template_default
 
 if __name__ == "__main__":
-	builder = ConanMultiPackager(username='bincrafters',
-					login_username=os.environ.get('CONAN_LOGIN_USERNAME'),
-					upload=os.environ.get('CONAN_UPLOAD'),
-					password=os.environ.get('CONAN_PASSWORD'),
-					channel='stable'
-					)
 
-	builder.add_common_builds()
-	builder.run()
+    builder = build_template_default.get_builder()
+
+    builder.run()
